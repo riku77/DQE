@@ -1,0 +1,633 @@
+/*ここでメニューの・消したりフォントを指定している*/
+
+
+/*フォントはネットが無い環境でも動く*/
+
+@font-face {
+    font-family: PixelMplus10 Regular;
+    src: url(https://cdn.leafscape.be/PixelMplus/PixelMplus10-Regular_web.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: PixelMplus12 Regular;
+    src: url(https://cdn.leafscape.be/PixelMplus/PixelMplus12-Regular_web.woff2) format("woff2")
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: PixelMplus10 Regular
+}
+
+li {
+    list-style-type: none
+}
+
+li {
+    font-size: 16px;
+    padding: 0;
+    margin: 0
+}
+
+.maou-list {
+    font-size: 13px;
+    position: center;
+}
+
+
+/*メニュー周りの装飾*/
+
+.status-list {
+    text-align: center;
+    width: 130px;
+    height: 137px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px
+}
+
+
+/*画面全体（メニュー）の定義*/
+
+html {
+    position: relative;
+    background: #000;
+    color: #fff;
+    font-family: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+    font-size: 16px;
+    word-spacing: 1px
+}
+
+
+/*位置の調整*/
+
+.status {
+    position: absolute;
+    top: 0px;
+    left: 96px;
+}
+
+
+/*実際の表示*/
+
+.status:before {
+    background-color: #000;
+    color: #fff;
+    /*ここでメニュー名の指定*/
+    content: "ステータス";
+    position: relative;
+    left: 37px;
+    top: 12px
+}
+
+
+/*モンスターのステータス*/
+
+.monster-st-list {
+    text-align: center;
+    width: 130px;
+    height: 137px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px
+}
+
+.monster {
+    position: absolute;
+    top: 0px;
+    left: 1500px;
+}
+
+.monster:before {
+    background-color: #000;
+    color: #fff;
+    /*ここでメニュー名の指定*/
+    content: "敵";
+    position: relative;
+    left: 70px;
+    top: 12px
+}
+
+.monsterLi {}
+
+
+/*サイドメニュー関連*/
+
+.room,
+.sidemenu {
+    position: absolute
+}
+
+.sidemenu {
+    top: 176px;
+    left: 95px;
+}
+
+.sidemenu:before {
+    background-color: #000;
+    color: #fff;
+    content: "コマンド";
+    position: relative;
+    left: 45px;
+    top: 12px
+}
+
+.menu-cursor[data-v-1ede1a2f] {
+    text-align: left;
+    font-family: メイリオ, Meiryo, ヒラギノ角ゴ Pro W3, HIragino Kaku Gothic Pro W3, HIragino Kaku Gothic Pro, Osaka, ＭＳ Ｐゴシック, MS P Gothic, sans-serif
+}
+
+.sidemenu-list[data-v-1ede1a2f] {
+    text-align: center;
+    width: 130px;
+    height: 270px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px
+}
+
+a[data-v-1ede1a2f]:link,
+a[data-v-1ede1a2f]:visited {
+    text-decoration: none;
+    color: #fff
+}
+
+
+/*コメント関連*/
+
+.comment-list {
+    text-align: left;
+    border-radius: 10px;
+    position: relative;
+    padding: 10px;
+    border: 2px solid #fff;
+    height: 125px;
+    width: 335px
+}
+
+.next-allow {
+    text-align: center
+}
+
+.choice,
+.comment {
+    position: absolute;
+    right: 20px;
+}
+
+.comment {
+    top: 340px;
+    left: 269px
+}
+
+.comment:before {
+    background-color: #000;
+    color: #fff;
+    position: relative;
+    left: 37px;
+    top: 12px
+}
+
+
+/*ポップアップウィンドウ*/
+
+.strategy-status {
+    /*ここでポップアップウィンドウを一回削除している*/
+    opacity: 0;
+    pointer-events: none;
+    /*display属性大事。表示してるか非表示か判定するときに使われる*/
+    display: none;
+    transition: all .5s ease 0s;
+    position: absolute;
+    /*-----------------*/
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 215px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    background-color: #000
+}
+
+.strategy-status.active {
+    opacity: 1;
+    display: block;
+    pointer-events: auto;
+    height: 465px;
+    width: 171px;
+    left: 61px;
+}
+
+#menu2 {
+    cursor: pointer;
+}
+
+.strategy-status:before {
+    background-color: #000;
+    color: #fff;
+    content: "戦うボス";
+    position: relative;
+    left: 60px;
+    top: -10px;
+}
+
+.strategy-status-list {
+    position: relative;
+    top: -31px;
+    text-align: center
+}
+
+.strategy-equipment {
+    background-color: #000;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 130px;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px
+}
+
+.strategy-equipment-list {
+    text-align: left
+}
+
+.strategy-parameter {
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 170px;
+    width: 160px;
+    height: 250px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #fff;
+    border-radius: 10px
+}
+
+.strategy-parameter-list {
+    text-align: right
+}
+
+
+/*一応再利用できるかも*/
+
+#senntakusi {
+    /* opacity: 0; */
+    top: 256px;
+    left: 269px;
+    height: auto;
+}
+
+
+/*DragonQuestDesignのcss*/
+
+
+/* ゲーム画面全体のデザイン */
+
+.game_window {
+    width: 100%;
+    height: 300px;
+    background-color: black;
+    color: white;
+}
+
+
+/* メニュー */
+
+.game_menu {
+    width: 100px;
+    border: 3px solid white;
+    border-radius: 6px;
+    margin: 1em;
+    padding: 1em;
+    float: left;
+}
+
+.game_enemy {
+    position: absolute;
+    top: 27px;
+    left: 330px;
+    width: 250px;
+    height: 100px;
+    margin: auto;
+    padding: auto;
+}
+
+#message {
+    color: #fff;
+    position: relative;
+    left: 37px;
+    top: 12px;
+    width: 300px;
+    margin: auto;
+    padding: auto;
+    float: left;
+}
+
+#game_control {}
+
+
+/* メッセージのアニメーション */
+
+@-webkit-keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 100%
+    }
+}
+
+span.message {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 1s;
+}
+
+
+/* メニュー用 */
+
+.menu {
+    cursor: pointer;
+}
+
+.menu:before {
+    cursor: pointer;
+    content: '　';
+}
+
+
+/* メニュー選択状態 */
+
+.menu-active:before {
+    content: '▶';
+    position: absolute;
+    left: 1.7rem;
+    /*下の方で定義しているblinkを使っている*/
+    animation: blink 1.4s infinite;
+}
+
+
+/* 点滅 */
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/*名前設定*/
+
+.nameSettingView {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    width: 900px;
+    height: 300px;
+    margin-left: -450px;
+    font-size: 20px;
+}
+
+.nameSettingView .yourName {
+    width: 150px;
+    height: 30px;
+    margin: 0 auto 2px;
+    border: #fff 4px solid;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.nameSettingView .inputView {
+    width: 570px;
+    margin: 0 auto;
+    border: #fff 4px solid;
+    border-radius: 8px;
+}
+
+.nameSettingView .inputView .txt {
+    padding-top: 8px;
+    padding-bottom: 6px;
+    border-bottom: #fff 2px solid;
+    text-align: center;
+}
+
+.nameSettingView .inputView .inputStrLi {
+    float: left;
+    width: 230px;
+    margin-top: 12px;
+    margin-left: 8px;
+}
+
+.nameSettingView .inputView .inputStrLi:last-child {
+    float: right;
+    width: 86px;
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+.nameSettingView .inputView .inputStrLi>li {
+    position: relative;
+    float: left;
+    margin-left: 22px;
+    margin-bottom: 14px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.nameSettingView .inputView .inputStrLi:last-child>li.back {
+    margin-top: 34px;
+}
+
+.nameSettingView .inputView .inputStrLi>li {
+    position: relative;
+    float: left;
+    margin-left: 22px;
+    margin-bottom: 14px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/*画像中央*/
+
+.img-center {
+    text-align: center;
+}
+
+
+/*ゲームオーバー画面*/
+
+
+/*とりあえず機能しとる*/
+
+
+/*
+数秒後にゲームオーバー画面がでるといった感じ。
+後はこれを敗北時にだけ表示するようにすればいい
+*/
+
+.endWindow {
+    display: none;
+    position: absolute;
+    width: 560px;
+    top: 100px;
+    left: 50%;
+    margin-left: -280px;
+    background: #000;
+    border: #fff 4px solid;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.endWindow.show {
+    display: block;
+    /*ここのwebkit-animationで何秒後に出現するか定義してる*/
+    -webkit-animation: endwindow 3s;
+    opacity: 1;
+}
+
+.endWindow .btnLi {
+    width: 300px;
+    margin: 20px auto 0;
+}
+
+.endWindow {
+    display: none;
+    position: absolute;
+    width: 560px;
+    top: 100px;
+    left: 50%;
+    margin-left: -280px;
+    background: #000;
+    border: #fff 4px solid;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.endWindow .btnLi {
+    width: 300px;
+    margin: 20px auto 0;
+}
+
+.endWindow .btnLi::after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden
+}
+
+.endWindow .btnLi>li {
+    float: left;
+    width: 140px;
+    border: 2px solid #fff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a94141), to(#840000));
+    border-radius: 8px;
+    text-align: center;
+    line-height: 30px;
+    -webkit-box-sizing: border-box
+}
+
+.endWindow .btnLi>li>a {
+    display: block;
+    height: 30px;
+    font-size: 16px;
+    color: #fff;
+    text-shadow: rgba(0, 0, 0, 0.6) 2px 2px 1px;
+    text-decoration: none
+}
+
+.endWindow .btnLi>li:last-child {
+    margin-left: 20px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #28b2df), to(#2086a8))
+}
+
+.endWindow .socialView {
+    padding: 0 20px;
+}
+
+.endWindow .socialView .socialTopView {
+    padding-top: 8px
+}
+
+.endWindow .socialView .socialTopView::after {
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden
+}
+
+.endWindow .socialView .socialTopView .twitterFollow,
+.endWindow .socialView .socialTopView .twitterBtn,
+.endWindow .socialView .socialTopView .fb-like,
+.endWindow .socialView .socialTopView .mixi,
+.endWindow .socialView .socialTopView .hatena,
+.endWindow .socialView .socialTopView .google,
+.endWindow .socialView .socialTopView .gree {
+    float: left;
+    margin-right: 5px
+}
+
+.endWindow .socialView .socialTopView .twitterFollow {
+    padding-top: 40px
+}
+
+.endWindow .socialView .socialTopView .twitterFollow iframe {
+    width: 150px !important
+}
+
+.endWindow .socialView .socialTopView .followerCount {
+    font-size: 14px;
+    font-family: "Helvetica", sans-serif, "Verdana", "Arial";
+    color: #666666
+}
+
+.endWindow .socialView .socialTopView .followerCount strong {
+    font-size: 21px;
+    color: #ee6600;
+    font-family: "Arial", "Helvetica", sans-serif, "Verdana"
+}
+
+.endWindow .socialView #fcbk {
+    padding: 10px 0
+}
+
+.endWindow .socialView .fbLikeBox {
+    background: #eee;
+    color: #fff
+}
+
+.endWindow.show {
+    display: block;
+    -webkit-animation: endwindow 3s;
+    opacity: 1;
+}
+
+@-webkit-keyframes endwindow {
+    0% {
+        opacity: 0
+    }
+    50% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}

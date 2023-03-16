@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+
+<head>
+    <!--文字コード-->
+    <meta charset="UTF-8">
+    <!--タイトル-->
+    <title>ドラクエ戦闘再現</title>
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="css/DragonQuestDesign.css">
+    <!--js-->
+
+    <!--
+        jqueryはネット環境なくても動いてるっぽい？
+        不安ならこのサイトを参考にすればjquery.jsダウンロードして同じディレクトリ階層に置くだけでローカルでも確実に動く
+        https://techacademy.jp/magazine/9482
+    -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous">
+    </script>
+
+
+    <!--
+    Vue.jsで実装してるキーボード操作がネット環境ないと動かない
+    input欄にフォーカスする手間を入れてもいいならjavascriptだけでキーボード操作できるからネットなくても動くはず
+    サイトにアクセスしたときに自動でinputにフォーカス当ててそこで固定できたらクリックしてフォーカス当てる手間はなくなるかな
+    
+    キーボードで操作するだけならtabキーで動かせるようにしとけばいいけど
+    カーソル移動とかのがゲームっぽい
+-->
+    <script src="https://unpkg.com/vue@next">
+    </script>
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <div id="all_interference"></div>
+
+    <div class="sidebar">
+        <!--ステータスメニュー-->
+        <section class="status">
+            <div class="status-list">
+                <ul>
+                    <li>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">名前:kawahara</font>
+                        </font>
+                    </li>
+
+                    <li>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">Lv：999</font>
+                        </font>
+                    </li>
+                    <li>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">HP：999</font>
+                        </font>
+                    </li>
+                    <li>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">MP：999</font>
+                        </font>
+                    </li>
+                    <li>
+                        <font style="vertical-align: inherit;">
+                            <font style="vertical-align: inherit;">EXP：999</font>
+                        </font>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!--コマンドメニュー-->
+        <section data-v-1ede1a2f="" class="sidemenu">
+            <div data-v-1ede1a2f="" class="sidemenu-list">
+                <!--こんな感じで半角スペースで区切ることで複数のクラスを指定できる-->
+                <div id="menu1" onclick="activeMenu(1);" class="menu mouse_over">魔王連戦 </div>
+                <div id="menu2" onclick="activeMenu(2);" class="menu mouse_over">魔王選択</div>
+                <div id="menu3" onclick="activeMenu(3);" class="menu mouse_over">PT作成</div>
+                <div id="menu4" onclick="activeMenu(4);" class="menu mouse_over">ふくびき</div>
+                <div id="menu5" onclick="activeMenu(5);" class="menu mouse_over">もちもの</div>
+            </div>
+
+            <!--ここでキー操作できるようにしてるっぽい-->
+            <!--ここのid要素にフォーカスしてキーボード操作実現してるね。-->
+            <input type="text" id="game_control" onkeydown="" style="opacity: 0;">
+
+        </section>
+    </div>
+
+
+
+
+
+    <!--なぜかキーボード操作で開けない-->
+    <!--ポップアップウィンドウ-->
+    <section class="window">
+        <div class="strategy-status">
+            <div class="strategy-status-list">
+                <ul>
+                    <br>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou1" onclick="maou_Selector(1);">竜王戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou2" onclick="maou_Selector(2);">シドー戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou3" onclick="maou_Selector(3);">ゾーマ戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou4" onclick="maou_Selector(4);">デスピサロ戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou5" onclick="maou_Selector(5);">ミルドラース戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou6" onclick="maou_Selector(6);">デスタムーア戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou7" onclick="maou_Selector(7);">オルゴデミーラ戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou8" onclick="maou_Selector(8);">ラプソーン戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou9" onclick="maou_Selector(9);">エルギオス戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou10" onclick="maou_Selector(10);">ネルゲル戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou11" onclick="maou_Selector(11);">ウルノーガ戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou12" onclick="maou_Selector(12);">エスターク戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou13" onclick="maou_Selector(13);">ダークドレアム戦</div>
+                    </li>
+                    <br>
+                    <li class="maou-list mouse_over">
+                        <div id="maou14" onclick="maou_Selector(14);">戻る</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!--どのキーを操作したかがいらないならopacity0で消せばいい-->
+            <input type="text" id="game_control2" onkeydown="" style="opacity: 0;">
+
+        </div>
+    </section>
+
+    <!--はい/いいえ選択用-->
+    <section class="window">
+        <div id="senntakusi" class="strategy-status">
+            <div class="strategy-status-list">
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--ここで画像貼るなりして敵を設置-->
+    <div class="game_enemy">
+        <!--このenemy_imgで魔王選択のときに画像を切り替える-->
+        <div id="enemy_img">
+            <img src="img/歴代魔王ドット.png" width=230 height=230 border="1">
+        </div>
+
+    </div>
+
+
+
+    <div class="comment">
+        <section>
+            <div class="comment-list">
+                <div id="message" style="">
+                    <span class="message">ドラクエの歴代ラスボス戦を再現した<br>ドラクエ風戦闘アプリです<br><br>ダブルクリックかキーボード操作で<br>メニューを選択してください</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </div>
+
+
+
+    <!--vue.jsを使う場合は.jsはid要素より後に置かないと読み込みでエラーでる-->
+    <script src="js/common.js"></script>
+    <script>
+        src = "js/Battle.js"
+    </script>
+
+
+
+    <!--サイト開いたときにデフォルトで実行みたいな感じにできるのかなここに置くと-->
+    <script>
+        activeMenu(1);
+    </script>
+
+
+
+
+
+
+    <script>
+        //音声再生 要素をクリックかキープレスしたら再生
+        const audio = new Audio('音声/序曲.mp3');
+        document.body.addEventListener('click', () => {
+            audio.play();
+        });
+        document.body.addEventListener('keypress', () => {
+            audio.play();
+        });
+
+        span = $('#game_control')
+        span2 = $('#game_control2')
+        span3 = $('.sidemenu')
+
+        $(function() {
+
+
+
+            //これだとキーボードが押されたら処理
+            $(window).keydown(function(e) {
+
+                //エンターキーを押したら初めて処理って感じ
+                //このままだとエンター押した後にクリックボタン押したら処理がバグるから要調整
+                if (e.keyCode == 13) {
+                    //エンター押したら魔王選択メニューのgame_controlをdetach
+                    //戻るボタンを押したときにこれがあることでmessageWindowが衝突するのを防ぐことができる
+                    $('#game_control2').detach();
+
+
+                    if ($(".strategy-status").css("display") == "none") {
+                        //魔王選択メニューが非表示の時
+
+                        //魔王選択メニューを表示したときに操作の衝突回避のためにメイン画面を消すので
+                        //魔王選択メニューを閉じる＝非表示にしたときにappendしてメイン画面を再び表示
+                        span3.appendTo("body")
+
+
+                    } else {
+                        // 魔王選択メニュー表示のとき
+
+                        // 魔王選択メニューを開いてる間はメイン画面の操作は不要なのでコマンド画面ごとdetachする
+                        // それだけだと魔王選択メニューを操作できないので一度消した権限をappendする
+                        span3.detach()
+                        span2.appendTo("body")
+                    }
+                }
+
+
+
+            });
+        });
+    </script>
+
+    <!--クリック時の処理-->
+    <script>
+        span = $('#game_control')
+        span2 = $('#game_control2')
+        span3 = $('.sidemenu')
+
+        $("body").on("click", function() {
+
+
+
+        });
+    </script>
+
+    <!--
+    メインメニュー用のmouseover
+    mouseover用のクラスを作ってみたけど不具合が発生するので二つにわける    
+-->
+    <script>
+        $(function() {
+
+            //外側の要素にマウスを乗せたら発動
+            $('.menu').mouseover(function() {
+
+
+
+
+                //アニメーションしながらテキストサイズが大きくなる
+                $(this).animate({
+                    fontSize: '20px',
+                }, 100);
+
+
+
+
+                //ここにはマウスを離したときの動作を記述
+            }).mouseout(function() {
+
+                //アニメーションしながらテキストサイズが元のサイズに戻る
+                $(this).animate({
+                    fontSize: '16px'
+                }, 100);
+
+            });
+        });
+    </script>
+
+    <!--魔王一覧用のmouseover-->
+
+    <script>
+        $(function() {
+
+            //外側の要素にマウスを乗せたら発動
+            $('.maou-list').mouseover(function() {
+
+                //アニメーションしながらテキストサイズが大きくなる
+                $(this).animate({
+                    fontSize: '20px'
+                }, 100);
+
+
+
+
+                //ここにはマウスを離したときの動作を記述
+            }).mouseout(function() {
+
+                //アニメーションしながらテキストサイズが元のサイズに戻る
+                $(this).animate({
+                    fontSize: '13px'
+                }, 100);
+
+            });
+        });
+    </script>
+
+
+
+
+
+</body>
+
+</html>
